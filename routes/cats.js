@@ -8,7 +8,7 @@ const router = new express.Router();
 /** get all cats: [{id, name, age}, ...] */
 router.get("/", async function (req, res, next) {
   try {
-    debugger;
+    // debugger;
     const cats = await Cat.getAll()
     return res.json(cats)
   } catch (e) {
