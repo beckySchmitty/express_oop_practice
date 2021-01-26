@@ -1,10 +1,19 @@
-/** Database for pg-oo */
+// database set up 
 
-const pg = require("pg");
+const { Client } = require("pg");
 
-const db = new pg.Client("postgresql:///pets_db");
+let DB_URI;
+
+if (process.env.NODE_ENV === "test") {
+    DB_URI = "postgresql:///pets_db_test";
+} else {
+    DB_URI = "postgresql:///pets_db";
+}
+
+let db = new Client({
+    connectionString: DB_URI
+  });
 
 db.connect();
-
 
 module.exports = db;

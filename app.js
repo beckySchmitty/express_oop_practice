@@ -1,16 +1,15 @@
 /** pg-oo express application. */
 
-
 const express = require("express");
 const catRoutes = require("./routes/cats");
-const dogRoutes = require("./routes/dogs");
+// const dogRoutes = require("./routes/dogs");
 
 const app = express();
 
 app.use(express.json());
 
 app.use("/cats", catRoutes);
-app.use("/dogs", dogRoutes);
+// app.use("/dogs", dogRoutes);
 
 
 /** 404 handler */

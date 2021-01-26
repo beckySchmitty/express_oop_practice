@@ -1,4 +1,5 @@
 const express = require("express");
+const db = require("../db");
 const Cat = require("../models/cat");
 
 const router = new express.Router();
