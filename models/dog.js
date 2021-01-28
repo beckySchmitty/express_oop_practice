@@ -30,8 +30,31 @@ class Dog {
         return new Dog(d.id, d.name, d.age)
     }
 
+    static async create(newName, newAge) {
+        const results = await db.query(`INSERT INTO dogs
+        (name, age)
+        VALUES ($1, $2)
+        RETURNING id, name, age`, [newName, newAge])
+        if (!results.rows[0]) {
+            throw new ExpressError("Dog not created", 400)
+        }
+        const {id, name, age} = results.rows[0];
+        return new Dog(id, name, age)
+    }
+
     speak() {
         console.log(`${this.dog} says WOOOOF`)
+    }
+
+    async remove() {
+        await db.query(`DELETE FROM dogs
+        WHERE id=$1`, [this.id]);
+    }
+
+    async save() {
+        await db.query(`UPDATE dogs
+        SET name=$1, age=$2
+        WHERE id=$3`, [this.name, this.age, this.id]);
     }
 
 
